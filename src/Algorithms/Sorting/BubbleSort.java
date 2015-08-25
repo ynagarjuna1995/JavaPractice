@@ -1,5 +1,6 @@
 package Algorithms.Sorting;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class BubbleSort {
@@ -44,12 +45,12 @@ public class BubbleSort {
         }
 
         Comparable[] sortedmembers = sort(members);
-
-        for (int l = 0; l < length; l++) {
-
-            System.out.println(sortedmembers[l]);
-        }
-
+// Cost Effective use the inbuilt functions :P
+//        for (int l = 0; l < length; l++) {
+//
+//            System.out.println(sortedmembers[l]);
+//        }
+        System.out.println(Arrays.toString(sortedmembers));
 
 
     }

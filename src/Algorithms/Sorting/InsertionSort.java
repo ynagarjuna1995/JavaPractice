@@ -1,5 +1,6 @@
 package Algorithms.Sorting;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class InsertionSort {
@@ -33,16 +34,19 @@ public class InsertionSort {
         }
         scanner.close();
         System.out.println("you have entered");
-        for (int h = 0; h < length; h++) {
-            System.out.print(members[h]);
-        }
+        System.out.println(Arrays.toString(members));
+//        Cost Effective use the inbuilt functions :P
+//        for (int h = 0; h < length; h++) {
+//            System.out.print(members[h]);
+//        }
 
         Comparable[] sortedMembers = insertionsort(members);
-
-        for (int l = 0; l < length; l++) {
-            System.out.println("Your Sorted Array is");
-            System.out.println(sortedMembers[l]);
-        }
+//         Cost Effective use the inbuilt functions :P
+//        for (int l = 0; l < length; l++) {
+//            System.out.println("Your Sorted Array is");
+//            System.out.println(sortedMembers[l]);
+//        }
+        System.out.println(Arrays.toString(sortedMembers));
 
     }
 }

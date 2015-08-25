@@ -1,4 +1,5 @@
 package Algorithms.Sorting;
+import java.util.Arrays;
 import java.util.Scanner;
 
 
@@ -57,11 +58,12 @@ public class SelectionSort {
         }
         scanner.close();
         Comparable[] sortedmembers = sort(members);
-
-        for (int k = 0; k <length ; k++) {
-            System.out.println(sortedmembers[k]);
-
-        }
+//         Cost Effective use the inbuilt functions :P
+//        for (int k = 0; k <length ; k++) {
+//            System.out.println(sortedmembers[k]);
+//
+//        }
+        System.out.println(Arrays.toString(sortedmembers));
 
 
 
