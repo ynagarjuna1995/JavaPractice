@@ -4,7 +4,7 @@ package Algorithms.Sorting.DataStructures;
   2. Add,Get at the end of the Linked List
   3. Adding an element after the specified element
   4. Adding an element before the specified element
-  5. Adding an element at the specfied position.
+  5. Adding an element at the specified position.
   6. Getting an element from the Linked List given a specified position
   7. Remove/Deleting an element in a Linked List
 
@@ -31,6 +31,15 @@ public class SinglyLinkedList<AnyType> implements Iterable<AnyType> {
     /* Checking whether the collection is empty*/
     public boolean isEmpty() {
         return head == null;
+    }
+
+    /* Checks whether an element is there in LinkedList are not*/
+
+    public boolean contains (AnyType data) {
+        for (AnyType temp : this)
+            if (temp.equals(data)) return true;
+        return false;
+
     }
 
     /**************************************************************
@@ -80,6 +89,40 @@ public class SinglyLinkedList<AnyType> implements Iterable<AnyType> {
         return temp.data;
     }
 
+    /**********************************************************************
+     * 1. Inserting an element before a specified element
+     * 2. Inserting an element after a specified element
+     * @param key - Element before or after which it needs to be inserted.
+     * @param toInsert - Actual element that need to be inserted
+     ***********************************************************************/
+
+    public void insertAfter (AnyType key, AnyType toInsert) {
+        Node<AnyType> temp = head;
+
+        while (temp != null && !temp.data.equals(key)) temp =temp.next;
+
+        if (temp != null)
+            temp.next = new Node<AnyType>(toInsert,temp.next);
+    }
+
+    public void insertBefore (AnyType key,AnyType toInsert) {
+
+        if (head == null) return;
+        if (head.data.equals(key)) addFirst(toInsert);
+
+        Node<AnyType> prev = null;
+        Node<AnyType> cur = head;
+
+        while (cur != null && !cur.data.equals(key)) {
+            prev = cur;
+            cur = cur.next;
+        }
+        if (cur != null){
+            // TODO -Resolve this caution message - Dereference etc., stuff
+            prev.next = new Node<AnyType>(toInsert,cur);
+        }
+    }
+
     /***************************************************
     *       Node Class (Must be Static)
     ****************************************************/
@@ -101,6 +144,12 @@ public class SinglyLinkedList<AnyType> implements Iterable<AnyType> {
     /*The whole idea of the iterator is to provide an access to a private aggregated data and at the same moment
       hiding the underlying representation. An iterator is Java is an object, and therefore it's implementation requires
       creating a class that implements the Iterator interface.*/
+
+    /*Method for creating an instance of Iterator i.e., getting the iterator object */
+
+    public Iterator<AnyType> iterator () {
+        return new SinglyLinkedListIterator();
+    }
 
     private class SinglyLinkedListIterator implements Iterator<AnyType> {
 
@@ -130,11 +179,6 @@ public class SinglyLinkedList<AnyType> implements Iterable<AnyType> {
 
     }
 
-
-    /*Method for creating an instance of Iterator i.e., getting the iterator object */
-    public Iterator<AnyType> iterator () {
-        return new SinglyLinkedListIterator();
-    }
 }
 
 
