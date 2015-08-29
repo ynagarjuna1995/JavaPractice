@@ -42,6 +42,20 @@ public class SinglyLinkedList<AnyType> implements Iterable<AnyType> {
 
     }
 
+    /*****************************************************************************************************
+     * 1. Calculate the length of the LinkedList
+     * Note: Counting the lenght after performing every operation and storing it in a variable may be a best choice
+     * *******************************************************************************************************/
+
+    public int getLength () {
+        int length =0;
+        if (head == null) return length;
+        Node<AnyType> temp = head;
+        while (temp!= null) temp = temp.next; length = length++;
+
+        return length;
+    }
+
     /**************************************************************
      *  1. Adding an element at the beginning of the LinkedList
      *  2. Getting the element in the beginning of the LinkedList
@@ -122,6 +136,33 @@ public class SinglyLinkedList<AnyType> implements Iterable<AnyType> {
             prev.next = new Node<AnyType>(toInsert,cur);
         }
     }
+
+    /**************************************************************************
+     * 1. Adding an element at specified position
+     * 2. Removing an element at specified position
+     * 3. Return the position of the specified element in the LinkedList
+     * @param pos - position
+     * @param toInsert - data to needed to be inserted
+     * Notes : Fixing the position is the key thing.
+     * *************************************************************************/
+
+    /*This basically replaces the existing element*/
+    public void addAtPosition (AnyType toInsert,int pos) {
+        if (pos < 0) pos = 0;
+        if (pos > 0) pos = getLength();
+
+        if (head == null && pos == 0) addFirst(toInsert);
+        else {
+            Node<AnyType> temp = head;
+            for (int i = 0; i < pos ; i++) {
+                temp = temp.next;
+            }
+            temp = new Node<AnyType>(toInsert,temp.next);
+        }
+
+    }
+
+
 
     /***************************************************
     *       Node Class (Must be Static)
