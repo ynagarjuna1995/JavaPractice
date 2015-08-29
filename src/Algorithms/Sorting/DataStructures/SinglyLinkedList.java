@@ -14,6 +14,7 @@ package Algorithms.Sorting.DataStructures;
   3. Check whether Linked List contains an element.
   4. Position resolution while adding an element at a given position*/
 
+
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -57,6 +58,28 @@ public class SinglyLinkedList<AnyType> implements Iterable<AnyType> {
         return tmp;
     }
 
+    /*******************************************************************
+     *  1. Adding an element at the end of the Linked List
+     *  2. Getting an element at the end of Linked List
+     ********************************************************************/
+
+    public void addLast (AnyType data) {
+        if (head == null) addFirst(data);
+        Node<AnyType> temp = head;
+        while (temp.next != null) temp = temp.next;
+
+        temp.next = new Node<AnyType>(data,null);
+    }
+
+    public AnyType getLast () {
+        if (head == null) throw new NoSuchElementException();
+
+        Node<AnyType> temp = head;
+        while(temp.next != null) temp = temp.next;
+
+        return temp.data;
+    }
+
     /***************************************************
     *       Node Class (Must be Static)
     ****************************************************/
@@ -83,7 +106,7 @@ public class SinglyLinkedList<AnyType> implements Iterable<AnyType> {
 
         private Node<AnyType> nextNode;
 
-        public void SinglyLinkedList () {
+        public SinglyLinkedListIterator () {
             Node<AnyType> nextNode = head;
         }
 
