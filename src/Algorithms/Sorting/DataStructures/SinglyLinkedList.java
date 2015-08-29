@@ -27,6 +27,36 @@ public class SinglyLinkedList<AnyType> implements Iterable<AnyType> {
         head = null;
     }
 
+    /* Checking whether the collection is empty*/
+    public boolean isEmpty() {
+        return head == null;
+    }
+
+    /**************************************************************
+     *  1. Adding an element at the beginning of the LinkedList
+     *  2. Getting the element in the beginning of the LinkedList
+     *  3. Remove an element in the beginning of the LinkedList & return that element.
+     *  ***********************************************************/
+
+    public void addFirst(AnyType data) {
+        //TODO Do Something- Understand Consequences - Warning:(42, 25) Explicit type argument AnyType can be replaced with <>
+        head = new Node<AnyType>(data,head);
+    }
+
+    public AnyType getFirst() {
+        if(head == null) throw new NoSuchElementException();
+        return head.data;
+    }
+
+    public AnyType removeFirst () {
+        if(head == null) throw new UnsupportedOperationException();
+        /* Return the head element
+        *  Assign head to next Node*/
+        AnyType tmp = getFirst();
+        head = head.next;
+        return tmp;
+    }
+
     /***************************************************
     *       Node Class (Must be Static)
     ****************************************************/
@@ -53,7 +83,7 @@ public class SinglyLinkedList<AnyType> implements Iterable<AnyType> {
 
         private Node<AnyType> nextNode;
 
-        public SinglyLinkedList () {
+        public void SinglyLinkedList () {
             Node<AnyType> nextNode = head;
         }
 
@@ -71,7 +101,7 @@ public class SinglyLinkedList<AnyType> implements Iterable<AnyType> {
             return res;
         }
         /*Not Implementing remove operation through Iterator*/
-        public AnyType remove() {
+        public void remove() {
             throw new UnsupportedOperationException();
         }
 
