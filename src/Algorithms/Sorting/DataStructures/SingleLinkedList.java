@@ -1,0 +1,124 @@
+package Algorithms.Sorting.DataStructures;
+
+import java.util.*;
+
+public class SingleLinkedList<anyType> implements Iterable<anyType>{
+
+    private Node<anyType> head;
+    private int length;
+
+    /******************************************************
+     *          Node Class
+     * *****************************************************/
+    private static class Node<anyType> {
+        private Node <anyType> next;
+        private anyType data;
+
+        public Node(Node<anyType> next, anyType data) {
+            this.next = next;
+            this.data = data;
+        }
+        /*************************************************************
+        *  Don't use this type of constructor. This constructor creates
+         * an object with value/data - null pointing to null reference/pointer.
+        *
+        * **********************************************************/
+
+/*        public Node(anyType data) {
+            this.data = data;
+            this.next = null;
+        }*/
+    }
+
+    /************************************************************
+     *         Implementing the Iterable Interface
+     * ***********************************************************/
+
+    public Iterator<anyType> iterator () {
+        return new SingleLinkedListIterator();
+    }
+
+    private class SingleLinkedListIterator implements Iterator<anyType> {
+
+    private Node<anyType> nextNode;
+
+        public SingleLinkedListIterator() {
+            nextNode = head;
+        }
+
+
+        public boolean hasNext() {
+            return nextNode !=null;
+        }
+        public anyType next() {
+            /*If there is no element throw exception*/
+            if (!hasNext()) throw new NoSuchElementException();
+            /*Returning the data assigning the identifier "res" which contains the element to return */
+            anyType res = nextNode.data;
+            nextNode = nextNode.next;
+            return res;
+        }
+    }
+
+    /*********************************************************
+     *          singlyLinkedList Constructor
+     * ********************************************************/
+
+    /*Creates an empty Linked List*/
+    public SingleLinkedList() {
+
+        /*******************************************************************
+         * Some website suggest to do this in a different way shown below
+         *
+         *      Constructor : This constructor creates an object with value null pointing to null reference/pointer
+         *              public Node(anyType data) {
+         *                  this.data = data;
+         *                   this.next = null;
+         *              }
+         *
+         *      head = new Node<anyType>(null)  -> Which is creating a Node with null value as shown below
+         *
+         *      --> B O O K null
+         *
+         * Don't do this mistake
+         *
+         * *****************************************************************/
+
+        head = null;
+        length = 0;
+    }
+
+    /***********************************************************
+     *  Add,Remove,get First Element in Linked List
+     * **********************************************************/
+    public void addFirst (anyType data) {
+
+        head = new Node<anyType>(head,data);
+        length++;
+    }
+
+    public String toString()
+    {
+        StringBuffer result = new StringBuffer();
+        for(Object x : this)
+            result.append(x + " ");
+
+        return result.toString();
+    }
+
+    public static void main(String[] args) throws Exception{
+
+        SingleLinkedList<String> list = new SingleLinkedList<String>();
+        if (list.length == 0) System.out.println("An Empty Linked List is created ");
+        list.addFirst("K");
+        System.out.println(list.length);
+        list.addFirst("O");
+        list.addFirst("O");
+        list.addFirst("B");
+        if (list.length == 4) System.out.println("Inserted elements succesfully using addFirst() ");
+        System.out.println(list.length);
+        System.out.println(list);
+
+
+    }
+}
