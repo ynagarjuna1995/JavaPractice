@@ -20,7 +20,7 @@ import java.util.NoSuchElementException;
 
 public class SinglyLinkedList<AnyType> implements Iterable<AnyType> {
 
-
+    private Node<AnyType> head;
     /***************************************************
      *       Node Class (Must be Static)
      ****************************************************/
@@ -32,6 +32,11 @@ public class SinglyLinkedList<AnyType> implements Iterable<AnyType> {
         public Node (AnyType data, Node<AnyType> next) {
             this.data = data;
             this.next = next;
+        }
+
+        public Node(AnyType data) {
+            this.data = data;
+            this.next = null;
         }
     }
 
@@ -77,17 +82,19 @@ public class SinglyLinkedList<AnyType> implements Iterable<AnyType> {
         }
     }
 
+    public String toString() {
+        StringBuffer result = new StringBuffer();
+        for(Object x : this)
+            result.append(x + " ");
 
+        return result.toString();
+    }
 
-
-
-
-    private Node<AnyType> head;
     /************************************************************
      *      Constructor which creates an empty SinglyLinkedList.
      *************************************************************/
     public SinglyLinkedList () {
-        head = null;
+        head = new Node<AnyType>(null);
     }
 
     /* Checking whether the collection is empty*/
@@ -125,8 +132,9 @@ public class SinglyLinkedList<AnyType> implements Iterable<AnyType> {
      *  ***********************************************************/
 
     public void addFirst(AnyType data) {
-
-        head = new Node<AnyType>(data,head);
+        Node<AnyType> temp;
+        temp = new Node<AnyType>(data,head);
+        head = temp;
     }
 
     public AnyType getFirst() {
@@ -143,10 +151,10 @@ public class SinglyLinkedList<AnyType> implements Iterable<AnyType> {
         return tmp;
     }
 
- /*   *//*******************************************************************
+    /******************************************************************
      *  1. Adding an element at the end of the Linked List
      *  2. Getting an element at the end of Linked List
-     ********************************************************************//*
+     *******************************************************************/
 
     public void addLast (AnyType data) {
         if (head == null) addFirst(data);
@@ -165,12 +173,12 @@ public class SinglyLinkedList<AnyType> implements Iterable<AnyType> {
         return temp.data;
     }
 
-    *//**********************************************************************
+    /*********************************************************************
      * 1. Inserting an element before a specified element
      * 2. Inserting an element after a specified element
      * @param key - Element before or after which it needs to be inserted.
      * @param toInsert - Actual element that need to be inserted
-     ***********************************************************************//*
+     **********************************************************************/
 
     public void insertAfter (AnyType key, AnyType toInsert) {
         Node<AnyType> temp = head;
@@ -199,16 +207,16 @@ public class SinglyLinkedList<AnyType> implements Iterable<AnyType> {
         }
     }
 
-    *//**************************************************************************
+/*    *************************************************************************
      * 1. Adding an element at specified position
      * 2. Removing an element at specified position
      * 3. Return the position of the specified element in the LinkedList
      * @param pos - position
      * @param toInsert - data to needed to be inserted
      * Notes : Fixing the position is the key thing.
-     * *************************************************************************//*
+     * *************************************************************************/
 
-    *//*This basically replaces the existing element*//*
+    /*This basically replaces the existing element*/
     public void addAtPosition (AnyType toInsert,int pos) {
         if (pos < 0) pos = 0;
         if (pos > 0) pos = getLength();
@@ -216,29 +224,31 @@ public class SinglyLinkedList<AnyType> implements Iterable<AnyType> {
         if (head == null && pos == 0) addFirst(toInsert);
         else {
             Node<AnyType> temp = head;
-            for (int i = 0; i < pos ; i++) {
+            for (int i = 0; i < pos; i++) {
                 temp = temp.next;
             }
-            temp = new Node<AnyType>(toInsert,temp.next);
+            temp = new Node<AnyType>(toInsert, temp.next);
         }
 
     }
 
-*/
 
     /************************************************************************************
      *          Main Method for Testing Purpose
      *
      * ***********************************************************************************/
 
-    public static void main (String[] args){
+    public static void main (String[] args) throws Exception{
 
         SinglyLinkedList<String> list = new SinglyLinkedList<String>();
 
         list.addFirst("5");
-        list.getFirst();
-        list.isEmpty();
+        list.getLength();
         System.out.println("Something");
+        System.out.println(list.getLength());
+        list.addFirst("B");
+        System.out.println(list.getLength());
+        System.out.println(list);
     }
 
 
