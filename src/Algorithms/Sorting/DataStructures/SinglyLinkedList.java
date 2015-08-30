@@ -20,6 +20,68 @@ import java.util.NoSuchElementException;
 
 public class SinglyLinkedList<AnyType> implements Iterable<AnyType> {
 
+
+    /***************************************************
+     *       Node Class (Must be Static)
+     ****************************************************/
+    private  class Node<AnyType> {
+        private Node<AnyType> next;
+        private AnyType data;
+
+        /*Constructor for the Node Class */
+        public Node (AnyType data, Node<AnyType> next) {
+            this.data = data;
+            this.next = next;
+        }
+    }
+
+    /******************************************************************
+     *         SinglyLinkedListIterator class implementing iterator
+     ******************************************************************/
+
+    /*The whole idea of the iterator is to provide an access to a private aggregated data and at the same moment
+      hiding the underlying representation. An iterator is Java is an object, and therefore it's implementation requires
+      creating a class that implements the Iterator interface.*/
+
+    /*Method for creating an instance of Iterator i.e., getting the iterator object */
+
+    public Iterator<AnyType> iterator () {
+        return new SinglyLinkedListIterator();
+    }
+
+    private class SinglyLinkedListIterator implements Iterator<AnyType> {
+
+        private Node<AnyType> nextNode;
+
+        public SinglyLinkedListIterator() {
+            Node<AnyType> nextNode = head;
+        }
+
+        public boolean hasNext() {
+            return nextNode != null;
+        }
+
+        /*Return the data in the LinkedList*/
+        public AnyType next() {
+            /*If there is no element throw exception*/
+            if (!hasNext()) throw new NoSuchElementException();
+            /*Returning the data assigning the identifier "res" which contains the element to return */
+            AnyType res = nextNode.data;
+            nextNode = nextNode.next;
+            return res;
+        }
+
+        /*Not Implementing remove operation through Iterator*/
+        public void remove() {
+            throw new UnsupportedOperationException();
+        }
+    }
+
+
+
+
+
+
     private Node<AnyType> head;
     /************************************************************
      *      Constructor which creates an empty SinglyLinkedList.
@@ -63,7 +125,7 @@ public class SinglyLinkedList<AnyType> implements Iterable<AnyType> {
      *  ***********************************************************/
 
     public void addFirst(AnyType data) {
-        //TODO Do Something- Understand Consequences - Warning:(42, 25) Explicit type argument AnyType can be replaced with <>
+
         head = new Node<AnyType>(data,head);
     }
 
@@ -81,10 +143,10 @@ public class SinglyLinkedList<AnyType> implements Iterable<AnyType> {
         return tmp;
     }
 
-    /*******************************************************************
+ /*   *//*******************************************************************
      *  1. Adding an element at the end of the Linked List
      *  2. Getting an element at the end of Linked List
-     ********************************************************************/
+     ********************************************************************//*
 
     public void addLast (AnyType data) {
         if (head == null) addFirst(data);
@@ -103,12 +165,12 @@ public class SinglyLinkedList<AnyType> implements Iterable<AnyType> {
         return temp.data;
     }
 
-    /**********************************************************************
+    *//**********************************************************************
      * 1. Inserting an element before a specified element
      * 2. Inserting an element after a specified element
      * @param key - Element before or after which it needs to be inserted.
      * @param toInsert - Actual element that need to be inserted
-     ***********************************************************************/
+     ***********************************************************************//*
 
     public void insertAfter (AnyType key, AnyType toInsert) {
         Node<AnyType> temp = head;
@@ -137,16 +199,16 @@ public class SinglyLinkedList<AnyType> implements Iterable<AnyType> {
         }
     }
 
-    /**************************************************************************
+    *//**************************************************************************
      * 1. Adding an element at specified position
      * 2. Removing an element at specified position
      * 3. Return the position of the specified element in the LinkedList
      * @param pos - position
      * @param toInsert - data to needed to be inserted
      * Notes : Fixing the position is the key thing.
-     * *************************************************************************/
+     * *************************************************************************//*
 
-    /*This basically replaces the existing element*/
+    *//*This basically replaces the existing element*//*
     public void addAtPosition (AnyType toInsert,int pos) {
         if (pos < 0) pos = 0;
         if (pos > 0) pos = getLength();
@@ -162,65 +224,28 @@ public class SinglyLinkedList<AnyType> implements Iterable<AnyType> {
 
     }
 
+*/
 
+    /************************************************************************************
+     *          Main Method for Testing Purpose
+     *
+     * ***********************************************************************************/
 
-    /***************************************************
-    *       Node Class (Must be Static)
-    ****************************************************/
-    private static class Node<AnyType> {
-        private Node<AnyType> next;
-        private AnyType data;
+    public static void main (String[] args){
 
-        /*Constructor for the Node Class */
-        public Node (AnyType data, Node<AnyType> next) {
-            this.data = data;
-            this.next = next;
-        }
+        SinglyLinkedList<String> list = new SinglyLinkedList<String>();
+
+        list.addFirst("5");
+        list.getFirst();
+        list.isEmpty();
+        System.out.println("Something");
     }
 
-    /******************************************************************
-     *         SinglyLinkedListIterator class implementing iterator
-     ******************************************************************/
 
-    /*The whole idea of the iterator is to provide an access to a private aggregated data and at the same moment
-      hiding the underlying representation. An iterator is Java is an object, and therefore it's implementation requires
-      creating a class that implements the Iterator interface.*/
 
-    /*Method for creating an instance of Iterator i.e., getting the iterator object */
-
-    public Iterator<AnyType> iterator () {
-        return new SinglyLinkedListIterator();
-    }
-
-    private class SinglyLinkedListIterator implements Iterator<AnyType> {
-
-        private Node<AnyType> nextNode;
-
-        public SinglyLinkedListIterator () {
-            Node<AnyType> nextNode = head;
-        }
-
-        public boolean hasNext() {
-           return nextNode != null;
-        }
-
-        /*Return the data in the LinkedList*/
-        public AnyType next() {
-            /*If there is no element throw exception*/
-            if(!hasNext()) throw new NoSuchElementException();
-            /*Returning the data assigning the identifier "res" which contains the element to return */
-            AnyType res = nextNode.data;
-            nextNode = nextNode.next;
-            return res;
-        }
-        /*Not Implementing remove operation through Iterator*/
-        public void remove() {
-            throw new UnsupportedOperationException();
-        }
-
-    }
 
 }
+
 
 
 
