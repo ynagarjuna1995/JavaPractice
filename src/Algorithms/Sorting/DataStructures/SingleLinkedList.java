@@ -34,6 +34,12 @@ public class SingleLinkedList<anyType> implements Iterable<anyType>{
      *         Implementing the Iterable Interface
      * ***********************************************************/
 
+    /*The whole idea of the iterator is to provide an access to a private aggregated data and at the same moment
+      hiding the underlying representation. An iterator is Java is an object, and therefore it's implementation requires
+      creating a class that implements the Iterator interface.*/
+
+    /*Method for creating an instance of Iterator i.e., getting the iterator object */
+
     public Iterator<anyType> iterator () {
         return new SingleLinkedListIterator();
     }
@@ -96,7 +102,12 @@ public class SingleLinkedList<anyType> implements Iterable<anyType>{
         head = new Node<anyType>(head,data);
         length++;
     }
-
+    /****************************************************************
+    * With out this method we will get a weird error :P
+     * Code would be : file_name@4554617c
+     * So we must convert this collection object to string in order to
+     * print this out.
+    **************************************************************** */
     public String toString()
     {
         StringBuffer result = new StringBuffer();
