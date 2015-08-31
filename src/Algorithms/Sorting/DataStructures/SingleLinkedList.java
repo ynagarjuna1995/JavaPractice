@@ -145,13 +145,35 @@ public class SingleLinkedList<anyType> implements Iterable<anyType>{
            cur = cur.next;
        }
 
-
        prev.next = null;
        return cur.data;
-
-
    }
 
+    /********************************************************************
+    *
+    *   InsertBefore() a specified element
+     *  InsertAfter() a specified element
+     *  @param key - element before or after which data need to be inserted
+     *         toInsert - element which need to be inserted.
+     *
+    * ********************************************************************/
+
+   public synchronized void insertBefore (anyType key,anyType toInsert) {
+       if (head == null) throw new UnsupportedOperationException();
+
+       Node<anyType> prev = null, cur = head;
+
+       while (cur.next != null && !cur.data.equals(key)){
+           prev = cur;
+           cur = cur.next;
+       }
+       /*Thought of adding an element at the beginnig but unable to do */
+       // TODO addFirst() if cur==head and key equals data of cur
+       if (cur == head && cur.data.equals(key)) throw new UnsupportedOperationException();
+       if (cur != null) {
+            prev.next = new Node<anyType>(cur, toInsert);
+        }
+   }
 
     /****************************************************************
     * With out this method we will get a weird error :P
@@ -190,6 +212,8 @@ public class SingleLinkedList<anyType> implements Iterable<anyType>{
         System.out.println(list.getLast());
         System.out.println("After removeLast() operation");
         System.out.println(list.removeLast());
+        System.out.println("After insertBefore() operation");
+        list.insertBefore("O","C");
         System.out.println("Printing all the elements in Linked list");
         System.out.println(list);
 
