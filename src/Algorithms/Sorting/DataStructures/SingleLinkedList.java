@@ -138,14 +138,27 @@ public class SingleLinkedList<anyType> implements Iterable<anyType>{
    public synchronized anyType removeLast () {
        if (head == null) throw new UnsupportedOperationException();
 
-       Node<anyType> prev = null, cur = head;
+       /**
+        * lastAccessed
+        * cur
+        *
+        * In an iteration
+        * 1st
+        *       cur = head
+        *       lastAccessed = null
+        * 2nd
+        *       lastAccessed = cur
+        *       cur = cur.next
+        *
+        * */
+       Node<anyType> lastAccessed = null, cur = head;
 
        while (cur.next != null) {
-           prev = cur;
+           lastAccessed = cur;
            cur = cur.next;
        }
 
-       prev.next = null;
+       lastAccessed.next = null;
        return cur.data;
    }
 
@@ -161,17 +174,17 @@ public class SingleLinkedList<anyType> implements Iterable<anyType>{
    public synchronized void insertBefore (anyType key,anyType toInsert) {
        if (head == null) throw new UnsupportedOperationException();
 
-       Node<anyType> prev = null, cur = head;
+       Node<anyType> lastAccessed = null, cur = head;
 
        while (cur.next != null && !cur.data.equals(key)){
-           prev = cur;
+           lastAccessed = cur;
            cur = cur.next;
        }
        /*Thought of adding an element at the beginnig but unable to do */
        // TODO addFirst() if cur==head and key equals data of cur
        if (cur == head && cur.data.equals(key)) throw new UnsupportedOperationException();
        if (cur != null) {
-            prev.next = new Node<anyType>(cur, toInsert);
+            lastAccessed.next = new Node<anyType>(cur, toInsert);
         }
    }
 
