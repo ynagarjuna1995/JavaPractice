@@ -139,27 +139,27 @@ public class SingleLinkedList<anyType> implements Iterable<anyType>{
        if (head == null) throw new UnsupportedOperationException();
 
        /**
-        * lastAccessed
-        * cur
+        * previous
+        * current
         *
         * In an iteration
         * 1st
-        *       cur = head
-        *       lastAccessed = null
+        *       current = head
+        *       previous = null
         * 2nd
-        *       lastAccessed = cur
-        *       cur = cur.next
+        *       previous = current
+        *       current = current.next
         *
         * */
-       Node<anyType> lastAccessed = null, cur = head;
+       Node<anyType> previous = null, current = head;
 
-       while (cur.next != null) {
-           lastAccessed = cur;
-           cur = cur.next;
+       while (current.next != null) {
+           previous = current;
+           current = current.next;
        }
 
-       lastAccessed.next = null;
-       return cur.data;
+       previous.next = null;
+       return current.data;
    }
 
     /********************************************************************
@@ -174,17 +174,17 @@ public class SingleLinkedList<anyType> implements Iterable<anyType>{
    public synchronized void insertBefore (anyType key,anyType toInsert) {
        if (head == null) throw new UnsupportedOperationException();
 
-       Node<anyType> lastAccessed = null, cur = head;
+       Node<anyType> previous = null, current = head;
 
-       while (cur.next != null && !cur.data.equals(key)){
-           lastAccessed = cur;
-           cur = cur.next;
+       while (current.next != null && !current.data.equals(key)){
+           previous = current;
+           current = current.next;
        }
        /*Thought of adding an element at the beginnig but unable to do */
-       // TODO addFirst() if cur==head and key equals data of cur
-       if (cur == head && cur.data.equals(key)) throw new UnsupportedOperationException();
-       if (cur != null) {
-            lastAccessed.next = new Node<anyType>(cur, toInsert);
+       // TODO addFirst() if current==head and key equals data of current
+       if (current == head && current.data.equals(key)) throw new UnsupportedOperationException();
+       if (current != null) {
+            previous.next = new Node<anyType>(current, toInsert);
         }
    }
 
