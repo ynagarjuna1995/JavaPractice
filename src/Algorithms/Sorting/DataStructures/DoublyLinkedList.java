@@ -100,9 +100,10 @@ public class DoublyLinkedList<anyType> implements Iterable<anyType> {
         if (head == null) throw new UnsupportedOperationException();
          dLLNode<anyType> current = head;
         dLLNode<anyType> previous = null;
-        while (current.next != null)  previous = current; current = current.next;
+        while (current.next != null) { previous = current; current = current.next;}
 
         previous.next = null;
+        length--;
 
         return current.data;
 
@@ -232,6 +233,7 @@ public class DoublyLinkedList<anyType> implements Iterable<anyType> {
         System.out.println(list.length);
         System.out.println(list.getLast());
         System.out.println(list.removeLast());
+        System.out.println(list.getLast());
 
     }
 }
