@@ -42,6 +42,8 @@ public class DoublyLinkedList<anyType> implements Iterable<anyType> {
 
     /**
      * addFirst
+     * getFirst
+     * removeFirst
      * */
 
     public void addFirst(anyType data) {
@@ -59,6 +61,54 @@ public class DoublyLinkedList<anyType> implements Iterable<anyType> {
         return head.data;
     }
 
+    public anyType removeFirst () {
+        if (head == null) throw new UnsupportedOperationException();
+
+        dLLNode<anyType> current = head;
+        head = current.next;
+        length--;
+        return current.data;
+
+    }
+
+    /**
+     * addLast
+     * removeLast
+     * getLast
+     *
+     * */
+
+    public void addLast (anyType data) {
+        if (head == null) addFirst(data);
+
+        dLLNode<anyType> current = head;
+        while (current.next != null) current = current.next;
+
+        current.next = new dLLNode<anyType>(current,null,data);
+        length++;
+    }
+
+    public anyType getLast () {
+        if (head == null) throw new NoSuchElementException();
+        dLLNode<anyType> current = head;
+        while (current.next != null) current = current.next;
+
+        return current.data;
+    }
+
+    public anyType removeLast () {
+        if (head == null) throw new UnsupportedOperationException();
+         dLLNode<anyType> current = head;
+        dLLNode<anyType> previous = null;
+        while (current.next != null)  previous = current; current = current.next;
+
+        previous.next = null;
+
+        return current.data;
+
+
+
+    }
 
 
 /*    public String toString () {
@@ -175,9 +225,13 @@ public class DoublyLinkedList<anyType> implements Iterable<anyType> {
         list.addFirst("O");
         System.out.println(list.length);
         System.out.println(list.getFirst());
+        System.out.println(list.removeFirst());
         System.out.println(list);
-
-
+        System.out.println(list.getFirst());
+        list.addLast("U");
+        System.out.println(list.length);
+        System.out.println(list.getLast());
+        System.out.println(list.removeLast());
 
     }
 }
