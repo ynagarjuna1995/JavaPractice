@@ -45,4 +45,16 @@ public class Dog {
         }
 
     }
+
+    /** Static Method :
+     *  If we access the Static methods with object that is instance refernce it throws error.
+     * */
+
+    public static Dog maxDog ( Dog d1, Dog d2 ){
+        if (d1.weightInPounds < d2.weightInPounds){
+            return  d2;
+        }
+        return d1;
+    }
+
 }
