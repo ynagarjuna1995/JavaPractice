@@ -18,8 +18,10 @@ package misc;
 
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Scanner;
 
 /**
  *  1. Here I am creating a text file in a particular location
@@ -37,19 +39,32 @@ public class ReadingAFile {
         /** Initialize the File Object
          *  Here if we provide a specific path text file will be created in that location else it will created in the
          *  project path.*/
-        try {
-            File file = new File("sample.txt");
-        /*Parmater is a file since we need to write to a text file whcih is refernced to the file object*/
+
+        File file = new File("sample.txt");
+/*        try {
+        *//*Parmater is a file since we need to write to a text file whcih is refernced to the file object*//*
             PrintWriter printWriter = new PrintWriter(file);
 
             printWriter.println("Nagarjuna");
             printWriter.print(42);
-        /* Closing the stream is necessary*/
+        *//* Closing the stream is necessary*//*
             printWriter.close();
         } catch (IOException ex){
             System.out.printf("Exception Found %s \n :", ex);
-        }
+        }*/
 
+        /* Reading from the file */
+
+        try {
+            Scanner textFileInput = new Scanner(file);
+
+            String name = textFileInput.next();
+            int age = textFileInput.nextInt();
+
+            System.out.printf("Name and Age are %s %d \n",name,age);
+        } catch (FileNotFoundException ex) {
+            System.out.printf("Exception Found %s \n", ex);
+        }
     }
 }
 
