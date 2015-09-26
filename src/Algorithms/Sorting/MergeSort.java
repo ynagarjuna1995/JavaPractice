@@ -9,9 +9,7 @@ import java.util.Arrays;
  * 2. Sort the auxillary array recursively
  * 3. Merge the sorted array.
  */
-public class MergeSort {
-
-    private MergeSort(){}
+ public class MergeSort {
 
     /**
      * In Place Merge Sort :
@@ -26,50 +24,61 @@ public class MergeSort {
      * a[k] = a[i++]
      */
 
-    public static void merge(Comparable[] a, Comparable[] aux, int low, int high, int mid) {
+        private MergeSort(){}
 
-        for (int k =0; k < high ; k++) {
-            aux[k] = a[k];
+        private static boolean less(Comparable v, Comparable w) {
+            return v.compareTo(w) < 0;
         }
-           int i = low,j = mid+1;
 
-           for (int k = 0; k < high ; k++) {
+        public static void merge(Comparable[] a, Comparable[] aux, int low, int high, int mid) {
 
-            if (i > mid) a[k] = aux[j++];
 
-            else if (j > high) a[k] = aux[i++];
+            for (int k =0; k <= high ; k++) {
+                aux[k] = a[k];
+            }
+            int i = low,j = mid+1;
 
-            else if (Algorithms.Sorting.InsertionSort.less(aux[j], aux[i])) {a[k] = aux[j++];}
+            for (int k = low; k <= high ; k++) {
 
-            else a[k] = aux[i++];
+                if (i > mid) a[k] = aux[j++];
 
+                else if (j > high) a[k] = aux[i++];
+
+                else if (less(aux[j],aux[i])) {
+                    a[k] = aux[j++];
+                }
+
+                else a[k] = aux[i++];
+
+            }
+        }
+
+        /**
+         * Implementation of all the sub-routines ,left,right,and split */
+        public static void sort(Comparable[] a,Comparable[] aux,int low,int high){
+
+
+            if (high <= low) return;
+            int mid = low + (high-low)/2;
+            sort(a,aux,low,mid);
+            sort(a, aux, mid + 1, high);
+            merge(a,aux,low,high,mid);
+
+        }
+
+        public static void sort (Comparable[] a){
+            Comparable[] aux = new Comparable[a.length];
+            sort(a,aux,0,a.length-1);
+        }
+
+        public static void main(String[] args) throws Exception{
+
+
+            Comparable[] a = {9,8,6,5,4,3,2,1};
+            MergeSort.sort(a);
+            System.out.println(Arrays.toString(a));
         }
     }
 
-    /**
-     * Implementation of all the sub-routines ,left,right,and split */
-    public static void sort(Comparable[] a,Comparable[] aux,int low,int high){
-        int mid = low + (high-low)/2;
-        if (high <= low) return;
-
-        sort(a,aux,low,mid);
-        sort(a, aux, mid + 1, high);
-        merge(a,aux,low,high,mid);
-
-    }
-
-    public static void msort (Comparable[] a){
-        Comparable[] aux = new Comparable[a.length];
-        sort(a,aux,0,a.length-1);
-    }
-
-    public static void main(String[] args) throws Exception{
-
-
-       Comparable[] a = {9,8,6,5,4,3,2,1};
-        msort(a);
-        System.out.println(Arrays.toString(a));
-    }
-}
 
 
